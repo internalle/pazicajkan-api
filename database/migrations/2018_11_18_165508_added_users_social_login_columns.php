@@ -15,7 +15,7 @@ class AddedUsersSocialLoginColumns extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('platform_id');
-            $table->enum('platform', ['FACEBOOK']);
+            $table->enum('platform', ['FACEBOOK'])->default("FACEBOOK");
         });
     }
 

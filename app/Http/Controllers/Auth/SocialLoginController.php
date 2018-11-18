@@ -13,25 +13,28 @@ class SocialLoginController extends Controller
 {
     public function login(Request $request)
     {
+        //stupid need to be refactored
         $email = $request->get('email');
         $name = $request->get('name');
+        $platform = $request->get('platform');
+        $platform_id = $request->get('platform_id');
 
         if (!empty($email) && !empty($name)) {
             $user = User::where('email', $email)->first();
 
             if (is_null($user)) {
-
-                User::insert([
+                $user = User::create([
                     'email' => $email,
                     'name' => $name,
-                    'platform' => 'FACEBOOK',
-                    'platform_id' => 'test',
+                    'platform' => $platform,
+                    'platform_id' => $platform_id,
                     'email_verified_at' => Carbon::now()->toDateTimeString()
                 ]);
             }
 
             return [
-                'success' => true
+                'success' => true,
+                'user_id' => $user['id']
             ];
         }
 
