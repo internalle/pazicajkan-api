@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SocialLoginRequest extends FormRequest
@@ -24,14 +25,15 @@ class SocialLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required',
+            'name' => 'required',
         ];
     }
 
     public function data() {
         return [
             'email' => $this->get('email'),
-            'name' => $this->get('name')
+            'name' => $this->get('name'),
         ];
     }
 }
